@@ -1,7 +1,11 @@
+//creates a new express application
 const express = require('express');
 const app = express();
+// bring in http
 const http = require('http');
+//turn our computer into a server with http
 const server = http.createServer(app);
+//pass your created server to socket.io
 const io = require('socket.io')(http);
 io.listen(server);
 
@@ -25,35 +29,28 @@ app.use(authRoutes);
 
 
 
-app.get('/', (req, res) => {
-  res.send('<h1>This is our whiteboard project server</h1>');
-  // res.sendFile(__dirname + '../index.html');
-});
+// app.get('/', (req, res) => {
+//   // res.send('<h1>This is our whiteboard project server</h1>');
+//   res.sendFile(__dirname + '/index.html');
+// });
 
 
 
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
-
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
 
 
-  // socket.on('chat message', (msg) => {
-  //   console.log('message: ' + msg);
-  // });
 
 
-  socket.on('chat message', (msg) => {
-    // io.emit('chat message', msg);
-    socket.broadcast.emit('chat message', msg);
-    
-  });
+io.on('connection', onConnection);
+
+let onConnection = (socket)=> {
+  socket.on('drawing',(data)=>socket.broadcast.emit('drawing',data));
+}
 
 
-});
+
+
+
 
 
 // Catchalls
