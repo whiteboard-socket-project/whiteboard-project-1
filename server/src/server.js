@@ -29,24 +29,19 @@ app.use(authRoutes);
 
 
 
-// app.get('/', (req, res) => {
-//   // res.send('<h1>This is our whiteboard project server</h1>');
-//   res.sendFile(__dirname + '/index.html');
-// });
+app.get('/', (req, res) => {
+  res.send('<h1>This is our whiteboard project server</h1>');
+
+});
 
 
 
 
 
-
-
-
-io.on('connection', onConnection);
-
-let onConnection = (socket)=> {
-  socket.on('drawing',(data)=>socket.broadcast.emit('drawing',data));
+let onConnection = (socket) => {
+  socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
 }
-
+io.on('connection', onConnection);
 
 
 
