@@ -5,7 +5,6 @@ require('dotenv').config();
 // Start up DB Server
 const mongoose = require('mongoose');
 
-// mongodb+srv://whiteboard:whiteboard@whiteboard-project.ezx2o.mongodb.net/whiteboard?retryWrites=true&w=majority
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,

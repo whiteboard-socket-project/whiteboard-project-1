@@ -26,8 +26,8 @@ app.use(authRoutes);
 
 
 app.get('/', (req, res) => {
-  // res.send('<h1>Hello world this is our whiteboard project server</h1>');
-  res.sendFile(__dirname + '/index.html');
+  res.send('<h1>Hello world this is our whiteboard project server</h1>');
+  // res.sendFile(__dirname + '../index.html');
 });
 
 
@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected');
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
